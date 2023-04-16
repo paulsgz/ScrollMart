@@ -1,10 +1,19 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import NavBar from './components/Navbar/NavBar.js'
+import Sidebar from './components/Sidebar/Sidebar.js'
 import './App.css';
 
 function App() {
+  const [showSidebar, setShowSidebar] = useState(false);
+
+  const toggleSidebar = () => setShowSidebar(!showSidebar);
+
   return (
-      <NavBar />
+    <>
+      <NavBar toggleSidebar={toggleSidebar} />
+      <Sidebar show={showSidebar} toggleSidebar={toggleSidebar} />
+      {/* Other components */}
+    </>
   );
 }
 

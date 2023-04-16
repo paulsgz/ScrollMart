@@ -1,0 +1,150 @@
+.sidebar {
+    width: 100%;
+    max-width: 280px;
+    padding: 1rem;
+    box-sizing: border-box;
+    position: fixed;
+    top: 60px; // Height of the navbar
+    left: 0;
+    height: calc(100% - 60px); // Subtract the height of the navbar
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    
+    &.show {
+      transform: translateX(0);
+    }
+  
+    .logo {
+      display: none;
+      width: 50%;
+      height: auto;
+      padding: 1rem 0;
+      text-align: center;
+    }
+  
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+  
+    .visit-count {
+      margin-bottom: 2rem;
+      text-align: center;
+  
+      .visit-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+      }
+    }
+  
+    .featured-ads {
+      margin-bottom: 2rem;
+  
+      .featured-ad {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f0f0f0;
+  
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  
+    .categories {
+      margin-bottom: 2rem;
+  
+      .category {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f0f0f0;
+  
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+  
+      .show-more {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        border: none;
+        color: #007bff;
+        cursor: pointer;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+  
+        svg {
+          margin-left: 0.5rem;
+          vertical-align: middle;
+        }
+      }
+    }
+  
+    .footer {
+      text-align: center;
+  
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+  
+        a {
+          margin: 0 0.5rem;
+          color: #333;
+          text-decoration: none;
+  
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+  
+      .copyright {
+        font-size: 0.8rem;
+        color: #777;
+      }
+    }
+  
+    @media (max-width: 1008px) {
+      width: 80%;
+      max-width: none;
+      transform: translateX(-100%);
+  
+      .logo {
+        display: block;
+      }
+    }
+    .sidebar-exit {
+        display: none;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    
+        svg {
+          color: #333;
+          font-size: 1.5rem;
+        }
+      }
+    
+      // ...
+    
+      @media (max-width: 1008px) {
+        width: 60%; // Updated width for screens below 1008px
+    
+        .logo {
+          display: block;
+        }
+    
+        .sidebar-exit {
+          display: block;
+        }
+      }
+    
+  }
+  
