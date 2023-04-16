@@ -5,6 +5,7 @@
   img {
     max-height: 40px;
     width: auto;
+    padding-left: 10px;
   }
 }
 
@@ -94,6 +95,10 @@ $navbar-height: 65px;
   flex: 1;
   display: flex;
   justify-content: flex-end;
+
+  i{
+    size: 1rem;
+  }
 }
 
 /* Define the style of the second search bar and hide it on large screens */

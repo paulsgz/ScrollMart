@@ -40,7 +40,7 @@ function NavBar({ toggleSidebar }) {
           <Nav className="vertical-menu">
             <Dropdown align="end">
               <Dropdown.Toggle as={Nav.Link} id="dropdown-basic">
-                <i className="bi bi-three-dots-vertical"></i>
+              <i className="bi bi-three-dots-vertical" style={{ fontSize: '32px' }}></i>
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item href="#action-1">Languages</Dropdown.Item>

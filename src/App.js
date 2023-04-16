@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import NavBar from './components/Navbar/NavBar.js'
 import Sidebar from './components/Sidebar/Sidebar.js'
-import './App.css';
+import './App.scss';
 
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
