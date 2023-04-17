@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import NavBar from './components/Navbar/NavBar.js'
-import Sidebar from './components/Sidebar/Sidebar.js'
+import NavBar from './components/Navbar/NavBar.js';
+import Sidebar from './components/Sidebar/Sidebar.js';
+import MainContent from './components/Main/MainContent.js';
 import './App.scss';
 
 function App() {
@@ -11,8 +12,13 @@ function App() {
   return (
     <>
       <NavBar toggleSidebar={toggleSidebar} />
-      <Sidebar show={showSidebar} toggleSidebar={toggleSidebar} />
-      {/* Other components */}
+      <div className="app-container">
+        <Sidebar show={showSidebar} toggleSidebar={toggleSidebar} />
+        <div className="main-wrapper">
+          <MainContent />
+          {/* Other components */}
+        </div>
+      </div>
     </>
   );
 }

@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
-import { FaBars, FaTimes, FaAngleDown, FaAngleUp } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaTimes, FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import Logo from '../../images/scrollmartLogo.png';
+import CountUp from 'react-countup';
 import './Sidebar.scss';
 
 function Sidebar({ show, toggleSidebar }) {
   const [sidebar, setSidebar] = useState(false);
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1008);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1008);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
 
   const showSidebar = () => setSidebar(!sidebar);
   const toggleCategories = () => setShowAllCategories(!showAllCategories);
@@ -54,11 +68,13 @@ function Sidebar({ show, toggleSidebar }) {
     {show && <img src={Logo} alt="Logo" className="logo" />} {/* Replace with your logo */}
     <div className="position-sticky">
       <div className="visit-count">
-        <h3 className='sidebar-title'>Visit Count</h3>
-        <p className="visit-number sidebar-subtitle">{visitCount.toLocaleString()}</p>
+        <h4 className='sidebar-title'>Visit Count</h4>
+        <p className="visit-number sidebar-subtitle">
+          <CountUp start={0} end={visitCount} duration={4} separator="," />
+        </p>
       </div>
       <div className="featured-ads">
-        <h3 className='sidebar-title'>Featured Ads</h3>
+        <h4 className='sidebar-title'>Featured Ads</h4>
         {featuredAds.map((ad, index) => (
           <div className="featured-ad" key={index}>
             {ad.title}
@@ -66,7 +82,7 @@ function Sidebar({ show, toggleSidebar }) {
         ))}
       </div>
       <div className="categories">
-        <h3 className='sidebar-title'>Categories</h3>
+        <h4 className='sidebar-title'>Categories</h4>
           {categories.slice(0, showAllCategories ? categories.length : 7).map((category, index) => (
             <div
             className={`category${index === activeCategory ? ' active' : ''} `}
@@ -86,6 +102,13 @@ function Sidebar({ show, toggleSidebar }) {
         <div className="footer-links">
           <a href="#">About</a>
           <a href="#">Contact</a>
+          {isSmallScreen && (
+            <>
+              <a href="#">Languages</a>
+              <a href="#">FAQs</a>
+              <a href="#">Dark Mode</a>
+            </>
+          )}
         </div>
         <p className="copyright">ScrollMart 2023 © Christian Seguiza</p>
       </div>

@@ -1,4 +1,8 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
   text-align: center;
 }
 
@@ -34,5 +38,23 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-wrapper {
+  flex-grow: 1;
+ padding-top: 20px; // Replace margin-top with padding-top
+  padding-left: 280px; // Adjust according to the width of your sidebar
+}
+
+@media (max-width: 1008px) {
+  .main-wrapper {
+    padding-left: 0;
+    padding-top: 0px;
   }
 }

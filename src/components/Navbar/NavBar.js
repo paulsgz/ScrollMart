@@ -54,10 +54,16 @@ function NavBar({ toggleSidebar }) {
       {/* Search bar for small screens */}
       <div className="searchBar">
         <Form className="d-flex">
+        <button className="menu-button" onClick={(event) => {
+            event.preventDefault();
+            toggleSidebar();
+          }}>
+            <FaBars />
+         </button>
           <FormControl
             type="search"
             placeholder="Search ads or products"
-            className="mr-2 rounded-pill"
+            className="mr-2 rounded-pill searchBar2"
             aria-label="Search"
           />
           <button className="search-icon" type="submit">
@@ -65,9 +71,6 @@ function NavBar({ toggleSidebar }) {
           </button>
         </Form>
       </div>
-      <button className="menu-button" onClick={toggleSidebar}>
-        <FaBars />
-      </button>
     </>
   );
 }

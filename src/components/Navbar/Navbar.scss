@@ -52,6 +52,9 @@ $navbar-height: 65px;
 .Nav {
   height: $navbar-height;
   background-color: white;
+  position: sticky !important;
+  top: 0;
+  width: 100%;
   z-index: 9999;
   @media (max-width: 1008px) {
     display: none !important;
@@ -61,6 +64,7 @@ $navbar-height: 65px;
     width: 100%; // Change the width to 100%
     max-width: 500px; // Add a max-width
     border-radius: 20px;
+    margin-left: 200px;
   }
 
   .form-control:focus {
@@ -104,6 +108,10 @@ $navbar-height: 65px;
 /* Define the style of the second search bar and hide it on large screens */
 .searchBar {
   padding: 15px;
+  position: sticky !important;
+  top: 0;
+  z-index: 999;
+  background-color: white;
 
   @media (min-width: 1008px) {
     display: none !important;
@@ -135,6 +143,10 @@ $navbar-height: 65px;
   align-items: center;
 }
 
+.searchBar2 {
+  margin-top: 5px;
+}
+
 .search-input {
   flex-grow: 1;
   border-radius: 20px;
@@ -155,7 +167,8 @@ $navbar-height: 65px;
   font-size: 1.5rem;
   padding: 0.5rem;
   border-radius: 0.25rem;
-
+  margin-right: 7px;
+  padding-top: 0px;
   &:hover {
     background-color: rgba(255, 255, 255, 0.9);
   }
