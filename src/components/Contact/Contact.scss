@@ -1,0 +1,67 @@
+.contact {
+    padding: 2rem 0;
+  
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+  
+    h2,
+    h3 {
+      font-family: 'Roboto', sans-serif;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+  
+    p {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+  
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+  
+      .contact-item {
+        flex-basis: 100%;
+        margin-bottom: 1rem;
+  
+        h3 {
+          font-size: 1.2rem;
+        }
+  
+        p {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  
+  @media screen and (min-width: 768px) {
+    .contact {
+      .container {
+        padding: 0 2rem;
+      }
+  
+      h2,
+      h3 {
+        font-size: 1.5rem;
+      }
+  
+      p {
+        font-size: 1.1rem;
+      }
+  
+      .contact-info {
+        .contact-item {
+          flex-basis: calc(33.33% - 2rem);
+        }
+      }
+    }
+  }
+  

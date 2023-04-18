@@ -12,32 +12,53 @@
 .ad-container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
   border: 1px solid #ccc;
   padding: 1rem;
-  border-radius: 0.25rem;
-  margin-bottom: 20px;
-}
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease-in-out;
 
-.ad-media {
-  img {
-    width: 100%;
-    height: auto;
+  .ad-media {
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.25rem;
+    }
+  }
+
+  .ad-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .ad-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .ad-description {
+      font-size: 0.9rem;
+    }
+
+    .ad-price {
+      font-size: 1.1rem;
+    }
+
+    .shop-now-btn {
+      align-self: flex-end;
+      background-color: blue;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #003366;
+      }
+    }
   }
 }
 
-.ad-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.shop-now-btn {
-  align-self: flex-end;
-  background-color: blue;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  text-transform: uppercase;
-}

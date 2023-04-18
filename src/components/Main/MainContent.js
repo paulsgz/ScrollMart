@@ -1,30 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import axios from 'axios';
 import './MainContent.scss';
 
-const MainContent = () => {
-  const [items, setItems] = useState([]);
+const MainContent = ({ articles, setArticles }) => {
   const [hasMore, setHasMore] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [noMoreProducts, setNoMoreProducts] = useState(false);
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const fetchData = () => {
-    // Replace this part with your API call to get the actual data
-    setTimeout(() => {
-      setItems(items.concat(Array.from({ length: 10 })));
-    }, 500);
-  };
+const fetchData = () => {
+  axios
+    .get(`http://localhost:5000/products?page=${currentPage}`)
+    .then((response) => {
+      setArticles([...articles, ...response.data.products]);
+      setCurrentPage(currentPage + 1);
 
-  const handleShopNowClick = (item) => {
-    // Handle "Shop Now" button click, redirect to the product site
-  };
+      // Set the noMoreProducts flag
+      setNoMoreProducts(response.data.noMoreProducts);
+    })
+    .catch((error) => console.error(error));
+};
+  
+
+const handleShopNowClick = (article) => {
+  window.open(article.url, '_blank');
+};
 
   return (
     <div className="main-content">
       <InfiniteScroll
-        dataLength={items.length}
+        dataLength={articles.length}
         next={fetchData}
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
@@ -34,19 +43,18 @@ const MainContent = () => {
           </p>
         }
       >
-        {items.map((item, index) => (
+        {articles.map((article, index) => (
           <div key={index} className="ad-container">
-            {/* Replace this with a video or image carousel */}
             <div className="ad-media">
-              <img src="https://via.placeholder.com/300" alt="Placeholder" />
+              <img src={article.image} alt={article.name} />
             </div>
             <div className="ad-info">
-              <h4 className="ad-title">Ad Title {index + 1}</h4>
-              <p className="ad-description">Ad Description {index + 1}</p>
-              <p className="ad-price">$100.00</p>
+              <h4 className="ad-title">{article.name}</h4>
+              <p className="ad-description">{article.shortDescription}</p>
+              <p className="ad-price">${article.salePrice}</p>
               <button
                 className="shop-now-btn btn-primary rounded-pill"
-                onClick={() => handleShopNowClick(item)}
+                onClick={() => handleShopNowClick(article)}
               >
                 Shop Now
               </button>
@@ -54,6 +62,7 @@ const MainContent = () => {
           </div>
         ))}
       </InfiniteScroll>
+      {noMoreProducts && <p>You have reached the end of available content.</p>}
     </div>
   );
 };

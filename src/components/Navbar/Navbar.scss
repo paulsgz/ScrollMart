@@ -6,6 +6,7 @@
     max-height: 40px;
     width: auto;
     padding-left: 10px;
+    cursor: pointer;
   }
 }
 
@@ -168,7 +169,7 @@ $navbar-height: 65px;
   padding: 0.5rem;
   border-radius: 0.25rem;
   margin-right: 7px;
-  padding-top: 0px;
+  padding-top: 0 !important;
   &:hover {
     background-color: rgba(255, 255, 255, 0.9);
   }

@@ -2,13 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { FaTimes, FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import Logo from '../../images/scrollmartLogo.png';
 import CountUp from 'react-countup';
+import axios from 'axios';
+import ReactGA from 'react-ga';
 import './Sidebar.scss';
 
-function Sidebar({ show, toggleSidebar }) {
-  const [sidebar, setSidebar] = useState(false);
+function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}) {
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1008);
+  const [pageviews, setPageviews] = useState(0);
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+
+  const trackingId ='G-MP4VEP0F69'; // Replace with your Google Analytics tracking ID
+  ReactGA.initialize(trackingId);
 
   useEffect(() => {
     const handleResize = () => {
@@ -21,17 +27,16 @@ function Sidebar({ show, toggleSidebar }) {
     };
   }, []);
 
+  function trackPageView() {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }
 
-  const showSidebar = () => setSidebar(!sidebar);
   const toggleCategories = () => setShowAllCategories(!showAllCategories);
+  
+  useEffect(() => {
+    trackPageView()
+  }, []);
 
-  // Replace with your actual data
-  const visitCount = 1000001;
-  const featuredAds = [
-    { title: 'Featured Ad 1' },
-    { title: 'Featured Ad 2' },
-    { title: 'Featured Ad 3' },
-  ];
   const categories = [
     'Electronics and Gadgets', 'Fashion and Apparel', 'Health and Beauty', 'Home and Garden', 'Sports and Outdoors',
     'Food and Beverage', 'Travel and Experiences', 'Automotive', 'Toys and Games', 'Books and Media',
@@ -55,32 +60,63 @@ function Sidebar({ show, toggleSidebar }) {
     'fas fa-phone-alt',
     'fas fa-chart-line',
   ];
-  
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  };
+
   const handleCategoryClick = (index) => {
     setActiveCategory(index);
+    axios
+      .get(`http://localhost:5000/search?title=${categories[index]}`)
+      .then((response) => {
+        setMainArticles(response.data.products);
+        scrollToTop();
+      })
+      .catch((error) => console.error(error));
   };
+
+  const fetchFeaturedProducts = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/featured-products');
+      setFeaturedProducts(response.data.products);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  useEffect(() => {
+    fetchFeaturedProducts();
+  }, []);
+  
 
   return (
   <div id="sidebarMenu" className={`sidebar bg-white${show ? ' show' : ''}`}>
     <button className="sidebar-exit" onClick={toggleSidebar}>
       <FaTimes />
     </button>
-    {show && <img src={Logo} alt="Logo" className="logo" />} {/* Replace with your logo */}
+    {show && <img src={Logo} alt="Logo" className="logo" />} 
     <div className="position-sticky">
-      <div className="visit-count">
-        <h4 className='sidebar-title'>Visit Count</h4>
-        <p className="visit-number sidebar-subtitle">
-          <CountUp start={0} end={visitCount} duration={4} separator="," />
-        </p>
-      </div>
-      <div className="featured-ads">
-        <h4 className='sidebar-title'>Featured Ads</h4>
-        {featuredAds.map((ad, index) => (
-          <div className="featured-ad" key={index}>
-            {ad.title}
-          </div>
-        ))}
-      </div>
+        <div className="visit-count">
+          <h4 className='sidebar-title'>Visit Count</h4>
+          <p className="visit-number sidebar-subtitle">
+            <CountUp end={pageviews} duration={4} separator="," />
+          </p>
+        </div>
+        <div className="featured-ads">
+          <h4 className='sidebar-title'>Featured Ads</h4>
+          {featuredProducts.map((product, index) => (
+            <a href={product.url} target="_blank" rel="noopener noreferrer" key={index} className='.sidebar-subtitle'>
+              <div className="featured-ad ">
+                {product.name}
+              </div>
+            </a>
+          ))}
+        </div>
       <div className="categories">
         <h4 className='sidebar-title'>Categories</h4>
           {categories.slice(0, showAllCategories ? categories.length : 7).map((category, index) => (
@@ -100,8 +136,8 @@ function Sidebar({ show, toggleSidebar }) {
       </div>
       <div className="footer">
         <div className="footer-links">
-          <a href="#">About</a>
-          <a href="#">Contact</a>
+          <a onClick={showAbout}>About</a>
+          <a onClick={showContact}>Contact</a>
           {isSmallScreen && (
             <>
               <a href="#">Languages</a>
