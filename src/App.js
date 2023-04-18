@@ -24,7 +24,7 @@ function App() {
 
   const fetchDefaultData = () => {
     axios
-      .get(`http://localhost:5000/products?page=1`)
+      .get(`https://scrollmartserver.onrender.com/products?page=1`)
       .then((response) => {
         // Shuffle the products array randomly
         const shuffledProducts = response.data.products.sort(() => Math.random() - 0.5);

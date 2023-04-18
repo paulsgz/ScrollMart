@@ -72,7 +72,7 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
   const handleCategoryClick = (index) => {
     setActiveCategory(index);
     axios
-      .get(`http://localhost:5000/search?title=${categories[index]}`)
+      .get(`https://scrollmartserver.onrender.com/search?title=${categories[index]}`)
       .then((response) => {
         setMainArticles(response.data.products);
         scrollToTop();
@@ -82,7 +82,7 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
 
   const fetchFeaturedProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/featured-products');
+      const response = await axios.get('https://scrollmartserver.onrender.com/featured-products');
       setFeaturedProducts(response.data.products);
     } catch (error) {
       console.error(error);

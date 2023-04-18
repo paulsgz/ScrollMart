@@ -14,7 +14,7 @@ const MainContent = ({ articles, setArticles }) => {
 
 const fetchData = () => {
   axios
-    .get(`http://localhost:5000/products?page=${currentPage}`)
+    .get(`https://scrollmartserver.onrender.com/products?page=${currentPage}`)
     .then((response) => {
       setArticles([...articles, ...response.data.products]);
       setCurrentPage(currentPage + 1);
