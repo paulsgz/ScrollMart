@@ -8,28 +8,10 @@ const MainContent = ({ articles, setArticles }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [noMoreProducts, setNoMoreProducts] = useState(false);
   const [bufferSize, setBufferSize] = useState(3); // Change this value to control the number of pages fetched at once
-  
-  const bestBuyApiKey = process.env.BEST_BUY_API_KEY;
-  
-  useEffect(() => {
-    fetchInitialData();
-  }, []);
 
-  const fetchInitialData = async () => {
-    try {
-      const pageSize = 10;
-      const url = `/bestbuy-api/v1/products(search="all")?format=json&show=all&pageSize=${pageSize}&page=1&sort=customerReviewCount.desc&apiKey=${bestBuyApiKey}`;
-      const response = await axios.get(url);
-  
-      // Filter out products without images
-      const productsWithImages = response.data.products.filter((product) => product.image && product.image.trim() !== '');
-  
-      setArticles(productsWithImages);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const fetchData = async () => {
     try {
