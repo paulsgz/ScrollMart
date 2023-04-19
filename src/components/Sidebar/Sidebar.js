@@ -89,6 +89,19 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
     }
   };
   
+  const fetchVisitCount = async () => {
+    try {
+      const response = await axios.get('/api/pageviews');
+      setPageviews(response.data.pageviews);
+    } catch (error) {
+      console.error('Error fetching visit count:', error);
+    }
+  };
+  
+  useEffect(() => {
+    fetchVisitCount();
+  }, []);
+  
   useEffect(() => {
     fetchFeaturedProducts();
   }, []);
