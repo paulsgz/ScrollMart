@@ -7,28 +7,36 @@ const MainContent = ({ articles, setArticles }) => {
   const [hasMore, setHasMore] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [noMoreProducts, setNoMoreProducts] = useState(false);
+  const [bufferSize, setBufferSize] = useState(3); // Change this value to control the number of pages fetched at once
 
   useEffect(() => {
     fetchData();
   }, []);
 
-const fetchData = () => {
-  axios
-    .get(`https://scrollmartserver.onrender.com/products?page=${currentPage}`)
-    .then((response) => {
-      setArticles([...articles, ...response.data.products]);
-      setCurrentPage(currentPage + 1);
+  const fetchData = async () => {
+    try {
+      let newArticles = [];
+      for (let i = 0; i < bufferSize; i++) {
+        const response = await axios.get(`https://scrollmartserver.onrender.com/products?page=${currentPage + i}`);
+        newArticles = [...newArticles, ...response.data.products];
 
-      // Set the noMoreProducts flag
-      setNoMoreProducts(response.data.noMoreProducts);
-    })
-    .catch((error) => console.error(error));
-};
-  
+        // Set the noMoreProducts flag
+        if (response.data.noMoreProducts) {
+          setNoMoreProducts(true);
+          break;
+        }
+      }
 
-const handleShopNowClick = (article) => {
-  window.open(article.url, '_blank');
-};
+      setArticles([...articles, ...newArticles]);
+      setCurrentPage(currentPage + bufferSize);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleShopNowClick = (article) => {
+    window.open(article.url, '_blank');
+  };
 
   return (
     <div className="main-content">
