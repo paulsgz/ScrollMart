@@ -13,7 +13,7 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
   const [pageviews, setPageviews] = useState(0);
   const [featuredProducts, setFeaturedProducts] = useState([]);
 
-  const trackingId ='G-MP4VEP0F69'; // Replace with your Google Analytics tracking ID
+  const trackingId ='G-EHLVFVYMBT'; // Replace with your Google Analytics tracking ID
   ReactGA.initialize(trackingId);
 
   useEffect(() => {
