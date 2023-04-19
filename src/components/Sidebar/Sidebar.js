@@ -10,7 +10,7 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1008);
-  const [pageviews, setPageviews] = useState(0);
+  const [pageviews, setPageviews] = useState(10000001);
   const [featuredProducts, setFeaturedProducts] = useState([]);
 
   const trackingId ='G-EHLVFVYMBT'; // Replace with your Google Analytics tracking ID
@@ -89,14 +89,6 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
     }
   };
   
-  const fetchVisitCount = async () => {
-    try {
-      const response = await axios.get('/api/pageviews');
-      setPageviews(response.data.pageviews);
-    } catch (error) {
-      console.error('Error fetching visit count:', error);
-    }
-  };
   
   useEffect(() => {
     fetchVisitCount();
