@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaTimes, FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import Logo from '../../images/scrollmartLogo.png';
-import CountUp from 'react-countup';
 import axios from 'axios';
 import './Sidebar.scss';
 
@@ -10,30 +9,7 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1008);
-  const [pageviews, setPageviews] = useState(0);
   const [featuredProducts, setFeaturedProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        `https://www.google-analytics.com/g/collect?v=2&tid=G-MP4VEP0F69&cid=${Math.random()}&t=event&ec=pageview&dp=%2F&cd1=${encodeURIComponent('total-pageviews')}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain',
-          },
-          body: '',
-        }
-      );
-      console.log('Response status:', response.status);
-      setPageviews(response.status === 200 ? 1 : 0);
-    };
-    
-  
-    fetchData();
-  }, []);
-  
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -113,12 +89,6 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
     </button>
     {show && <img src={Logo} alt="Logo" className="logo" />} 
     <div className="position-sticky">
-        <div className="visit-count">
-          <h4 className='sidebar-title'>Visit Count</h4>
-          <p className="visit-number sidebar-subtitle">
-            <CountUp end={pageviews} duration={4} separator="," />
-          </p>
-        </div>
         <div className="featured-ads">
           <h4 className='sidebar-title'>Featured Ads</h4>
           {featuredProducts.map((product, index) => (
