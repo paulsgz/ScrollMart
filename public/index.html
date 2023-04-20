@@ -36,32 +36,6 @@
       gtag('js', new Date());
       gtag('config', 'G-MP4VEP0F69');
     </script>
-    <!-- Load the Embed API library -->
-    <script>
-      (function(w,d,s,g,js,fs){
-        g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
-        js=d.createElement(s);fs=d.getElementsByTagName(s)[0];
-        js.src='https://apis.google.com/js/platform.js';
-        fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
-      }(window,document,'script'));
-    </script>
-
-    <!-- Set up the authorization -->
-    <script>
-      gapi.analytics.ready(function() {
-        gapi.analytics.auth.authorize({
-          container: 'auth-button',
-          clientid: '382065531765-odm7advbdo1lqi59ul7e7umm9jb5hmaf.apps.googleusercontent.com',
-          userInfoLabel: 'Logged in as: ',
-        });
-
-        // Replace 'YOUR_API_KEY' with the API key you generated in step 4
-        gapi.client.setApiKey('AIzaSyBh-MN2DtEGdPliMgapgLj-xPqW0Yy_IdE');
-        gapi.client.load('analytics', 'v3').then(function() {
-          // Additional code to render the dashboard will go here
-        });
-      });
-    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

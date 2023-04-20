@@ -13,6 +13,25 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
   const [pageviews, setPageviews] = useState(0);
   const [featuredProducts, setFeaturedProducts] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        `https://www.google-analytics.com/g/collect?v=2&tid=G-MP4VEP0F69&cid=${Math.random()}&t=event&ec=pageview&dp=%2F&cd1=${encodeURIComponent('total-pageviews')}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain',
+          },
+          body: '',
+        }
+      );
+      setPageviews(response.status === 200 ? 1 : 0);
+    };
+  
+    fetchData();
+  }, []);
+  
+
 
   useEffect(() => {
     const handleResize = () => {
