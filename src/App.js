@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar/Sidebar.js';
 import MainContent from './components/Main/MainContent.js';
 import About from './components/About/About.js';
 import Contact from './components/Contact/Contact.js'
+import PageViews from './components/Pageviewschart.js;'
 import axios from 'axios';
 import './App.scss';
 
@@ -55,6 +56,7 @@ function App() {
   
   return (
     <>
+    <PageViews />
       <NavBar
         toggleSidebar={toggleSidebar}
         setMainArticles={setMainArticles}

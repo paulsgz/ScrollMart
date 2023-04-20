@@ -3,8 +3,8 @@ import { FaTimes, FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import Logo from '../../images/scrollmartLogo.png';
 import CountUp from 'react-countup';
 import axios from 'axios';
-import ReactGA from 'react-ga';
 import './Sidebar.scss';
+
 
 function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}) {
   const [showAllCategories, setShowAllCategories] = useState(false);
@@ -13,8 +13,6 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
   const [pageviews, setPageviews] = useState(0);
   const [featuredProducts, setFeaturedProducts] = useState([]);
 
-  const trackingId ='G-MP4VEP0F69'; // Replace with your Google Analytics tracking ID
-  ReactGA.initialize(trackingId);
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,20 +24,6 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  async function trackPageView() {
-    try {
-      await ReactGA.pageview(window.location.pathname + window.location.search, [], 'Sidebar');
-      const viewCount = ReactGA.ga('getAll')[0].get('pageviews');
-      setPageviews(viewCount);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  useEffect(() => {
-    trackPageView();
-  }, [trackPageView]);
 
   const toggleCategories = () => setShowAllCategories(!showAllCategories);
   
