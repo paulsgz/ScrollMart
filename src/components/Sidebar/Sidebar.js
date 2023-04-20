@@ -25,8 +25,10 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
           body: '',
         }
       );
+      console.log('Response status:', response.status);
       setPageviews(response.status === 200 ? 1 : 0);
     };
+    
   
     fetchData();
   }, []);
