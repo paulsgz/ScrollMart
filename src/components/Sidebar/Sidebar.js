@@ -13,7 +13,7 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
   const [pageviews, setPageviews] = useState(1000001);
   const [featuredProducts, setFeaturedProducts] = useState([]);
 
-  const trackingId ='G-EHLVFVYMBT'; // Replace with your Google Analytics tracking ID
+  const trackingId ='G-MP4VEP0F69'; // Replace with your Google Analytics tracking ID
   ReactGA.initialize(trackingId);
 
   useEffect(() => {
@@ -28,7 +28,11 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
   }, []);
 
   function trackPageView() {
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    ga('create', trackingId, 'auto');
+    ga('set', 'page', window.location.pathname + window.location.search);
+    ga('send', 'pageview');
+    const viewCount = ga.getAll()[0].get('pageviews');
+    setPageviews(viewCount);
   }
 
   const toggleCategories = () => setShowAllCategories(!showAllCategories);
