@@ -28,10 +28,8 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
   }, []);
 
   function trackPageView() {
-    ga('create', trackingId, 'auto');
-    ga('set', 'page', window.location.pathname + window.location.search);
-    ga('send', 'pageview');
-    const viewCount = ga.getAll()[0].get('pageviews');
+    ReactGA.pageview(window.location.pathname + window.location.search, [], 'Sidebar');
+    const viewCount = ReactGA.pageview(window.location.pathname + window.location.search, [], 'Sidebar');
     setPageviews(viewCount);
   }
 
