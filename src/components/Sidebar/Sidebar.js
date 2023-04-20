@@ -10,7 +10,7 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1008);
-  const [pageviews, setPageviews] = useState(1000001);
+  const [pageviews, setPageviews] = useState(0);
   const [featuredProducts, setFeaturedProducts] = useState([]);
 
   const trackingId ='G-MP4VEP0F69'; // Replace with your Google Analytics tracking ID
@@ -37,6 +37,8 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
   
   useEffect(() => {
     trackPageView()
+    console.log(pageviews);
+    console.log(trackPageView());
   }, []);
 
   const categories = [
