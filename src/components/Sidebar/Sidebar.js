@@ -27,25 +27,22 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
     };
   }, []);
 
-  function trackPageView() {
-    ReactGA.pageview(window.location.pathname + window.location.search, [], 'Sidebar');
+  async function trackPageView() {
     try {
+      await ReactGA.pageview(window.location.pathname + window.location.search, [], 'Sidebar');
       const viewCount = ReactGA.ga('getAll')[0].get('pageviews');
       setPageviews(viewCount);
     } catch (error) {
       console.error(error);
-      setPageviews(0);
     }
   }
-  
+
+  useEffect(() => {
+    trackPageView();
+  }, [trackPageView]);
+
   const toggleCategories = () => setShowAllCategories(!showAllCategories);
   
-  useEffect(() => {
-    trackPageView()
-    console.log(pageviews);
-    console.log(trackPageView());
-  }, []);
-
   const categories = [
     'Electronics and Gadgets', 'Fashion and Apparel', 'Health and Beauty', 'Home and Garden', 'Sports and Outdoors',
     'Food and Beverage', 'Travel and Experiences', 'Automotive', 'Toys and Games', 'Books and Media',
