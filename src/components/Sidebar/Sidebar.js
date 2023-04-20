@@ -29,9 +29,15 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
 
   function trackPageView() {
     ReactGA.pageview(window.location.pathname + window.location.search, [], 'Sidebar');
-    setPageviews(prevPageviews => prevPageviews + 1);
+    try {
+      const viewCount = ReactGA.ga('getAll')[0].get('pageviews');
+      setPageviews(viewCount);
+    } catch (error) {
+      console.error(error);
+      setPageviews(0);
+    }
   }
-
+  
   const toggleCategories = () => setShowAllCategories(!showAllCategories);
   
   useEffect(() => {
