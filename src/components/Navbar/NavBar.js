@@ -27,8 +27,10 @@ function NavBar({ toggleSidebar,  setMainArticles, onLogoClick  }) {
   };
   
   const handleSearch = () => {
+    const DEVurl = `http://localhost:10000/search?title=${searchQuery}`
+    const APIurl = `https://scrollmartserver.onrender.com/search?title=${searchQuery}`;
     axios
-      .get(`https://scrollmartserver.onrender.com/search?title=${searchQuery}`)
+      .get(APIurl)
       .then((response) => {
         setMainArticles(response.data.products);
       })

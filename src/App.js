@@ -14,6 +14,7 @@ function App() {
   const [showContact, setShowContact] = useState(false);
   const toggleSidebar = () => setShowSidebar(!showSidebar);
 
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -23,8 +24,10 @@ function App() {
   };
 
   const fetchDefaultData = () => {
+    const APIurl = `https://scrollmartserver.onrender.com/products?page=1`;
+    const DEVurl = `http://localhost:10000/products?page=1`
     axios
-      .get(`https://scrollmartserver.onrender.com/products?page=1`)
+      .get(APIurl)
       .then((response) => {
         // Shuffle the products array randomly
         const shuffledProducts = response.data.products.sort(() => Math.random() - 0.5);

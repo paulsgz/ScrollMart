@@ -17,7 +17,9 @@ const MainContent = ({ articles, setArticles }) => {
     try {
       let newArticles = [];
       for (let i = 0; i < bufferSize; i++) {
-        const response = await axios.get(`https://scrollmartserver.onrender.com/products?page=${currentPage + i}`);
+        const DEVurl = `http://localhost:10000/products?page=${currentPage + i}`
+        const APIurl = `https://scrollmartserver.onrender.com/products?page=${currentPage + i}`;
+        const response = await axios.get(APIurl);
         newArticles = [...newArticles, ...response.data.products];
 
         // Set the noMoreProducts flag

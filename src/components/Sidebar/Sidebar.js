@@ -11,6 +11,9 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1008);
   const [featuredProducts, setFeaturedProducts] = useState([]);
 
+ 
+
+
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 1008);
@@ -30,7 +33,9 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
     'Fitness and Wellness', 'Arts and Crafts', 'Pets and Animals', 'Services and Consultations', 'Business and Finance',
   ];
 
-  const categoryIcons = [
+ 
+  
+ const categoryIcons = [
     'fas fa-laptop',
     'fas fa-tshirt',
     'fas fa-briefcase-medical',
@@ -56,10 +61,14 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
     });
   };
 
+
+
   const handleCategoryClick = (index) => {
     setActiveCategory(index);
+    const DEVurl = `http://localhost:10000/search?title=${categories[index]}`
+    const APIurl = `https://scrollmartserver.onrender.com/search?title=${categories[index]}`;
     axios
-      .get(`https://scrollmartserver.onrender.com/search?title=${categories[index]}`)
+      .get(APIurl)
       .then((response) => {
         setMainArticles(response.data.products);
         scrollToTop();

@@ -22,11 +22,13 @@
   .ad-media {
     img {
       width: 100%;
+      max-height: 400px; // Set a maximum height for the image
       height: auto;
+      object-fit: contain; // This will maintain the aspect ratio of the image without cropping it
       border-radius: 0.25rem;
     }
   }
-
+  
   .ad-info {
     display: flex;
     flex-direction: column;
