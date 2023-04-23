@@ -24,8 +24,8 @@ function App() {
   };
 
   const fetchDefaultData = () => {
-    const APIurl = `https://scrollmartserver.onrender.com/products?page=1`;
-    const DEVurl = `http://localhost:10000/products?page=1`
+    const APIurl = `https://scrollmartserver.onrender.com/combined/products?page=1`;
+    const DEVurl = `http://localhost:10000/combined/products?page=1`
     axios
       .get(APIurl)
       .then((response) => {

@@ -65,8 +65,8 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
 
   const handleCategoryClick = (index) => {
     setActiveCategory(index);
-    const DEVurl = `http://localhost:10000/search?title=${categories[index]}`
-    const APIurl = `https://scrollmartserver.onrender.com/search?title=${categories[index]}`;
+    const DEVurl = `http://localhost:10000/combined/search?title=${categories[index]}`
+    const APIurl = `https://scrollmartserver.onrender.com/combined/search?title=${categories[index]}`;
     axios
       .get(APIurl)
       .then((response) => {

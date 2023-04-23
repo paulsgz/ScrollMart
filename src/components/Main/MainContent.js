@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import axios from 'axios';
+
 import './MainContent.scss';
 
 const MainContent = ({ articles, setArticles }) => {
@@ -17,8 +18,8 @@ const MainContent = ({ articles, setArticles }) => {
     try {
       let newArticles = [];
       for (let i = 0; i < bufferSize; i++) {
-        const DEVurl = `http://localhost:10000/products?page=${currentPage + i}`
-        const APIurl = `https://scrollmartserver.onrender.com/products?page=${currentPage + i}`;
+        const DEVurl = `http://localhost:10000/combined/products?page=${currentPage + i}`
+        const APIurl = `https://scrollmartserver.onrender.com/combined/products?page=${currentPage + i}`;
         const response = await axios.get(APIurl);
         newArticles = [...newArticles, ...response.data.products];
 
@@ -55,26 +56,40 @@ const MainContent = ({ articles, setArticles }) => {
       >
         {articles.map((article, index) => (
           <div key={index} className="ad-container">
-            <div className="ad-media">
-              <img src={article.image} alt={article.name} />
-            </div>
-            <div className="ad-info">
-              <h4 className="ad-title">{article.name}</h4>
-              <p className="ad-description">{article.shortDescription}</p>
-              <p className="ad-price">${article.salePrice}</p>
-              <button
-                className="shop-now-btn btn-primary rounded-pill"
-                onClick={() => handleShopNowClick(article)}
-              >
-                Shop Now
-              </button>
-            </div>
+            <a
+              className="ad-link"
+              href={article.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="ad-media">
+                <img src={article.image} alt={article.name} />
+              </div>
+              <div className="ad-info">
+                <div className="ad-title-wrapper">
+                  <div className="ad-logo">
+                    <img src={article.logo} alt={`${article.source} logo`} />
+                  </div>
+                  <h4 className="ad-title">{article.name}</h4>
+                </div>
+                <p className="ad-description">{article.shortDescription}</p>
+                <p className="ad-price">${article.salePrice}</p>
+                <button
+                  className="shop-now-btn btn-primary rounded-pill"
+                  onClick={() => handleShopNowClick(article)}
+                >
+                  Shop Now
+                </button>
+              </div>
+            </a>
           </div>
         ))}
+
       </InfiniteScroll>
       {noMoreProducts && <p>You have reached the end of available content.</p>}
     </div>
   );
+  
 };
 
 export default MainContent;

@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 700px; // Set a maximum width for the main content
+  max-width: 700px;
   width: 100%;
-  margin: 0 auto; // Center the main content
-  padding: 0 15px; // Add some horizontal padding
+  margin: 0 auto;
+  padding: 0 15px;
   box-sizing: border-box;
 }
 
@@ -19,16 +19,35 @@
   margin-bottom: 2rem;
   transition: all 0.3s ease-in-out;
 
+  .ad-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+  .ad-logo {
+    max-width: 100px; /* You can adjust this value based on your design preferences */
+    margin-top: 15px;
+    margin-bottom: 15px;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
   .ad-media {
     img {
       width: 100%;
-      max-height: 400px; // Set a maximum height for the image
+      max-height: 400px;
       height: auto;
-      object-fit: contain; // This will maintain the aspect ratio of the image without cropping it
+      object-fit: contain;
       border-radius: 0.25rem;
     }
   }
-  
+
   .ad-info {
     display: flex;
     flex-direction: column;
@@ -37,14 +56,17 @@
     .ad-title {
       font-size: 1.2rem;
       font-weight: bold;
+      color: black;
     }
 
     .ad-description {
       font-size: 0.9rem;
+      color: black;
     }
 
     .ad-price {
       font-size: 1.1rem;
+      color: black;
     }
 
     .shop-now-btn {
@@ -63,4 +85,3 @@
     }
   }
 }
-
