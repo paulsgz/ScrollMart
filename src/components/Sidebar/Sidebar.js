@@ -78,7 +78,7 @@ function Sidebar({ show, toggleSidebar, setMainArticles, showAbout, showContact}
 
   const fetchFeaturedProducts = async () => {
     try {
-      const response = await axios.get('https://scrollmartserver.onrender.com/featured-products');
+      const response = await axios.get('https://scrollmartserver.onrender.com/bestbuy/featured-products');
       setFeaturedProducts(response.data.products);
     } catch (error) {
       console.error(error);
